@@ -1,0 +1,10 @@
+[
+  {
+    "_id": "1766650231645",
+    "name": "2we",
+    "email": "rkmadan.cs24@bmsce.ac.in",
+    "password": "$2b$10$OVTnEuf9R2ZF2.PYCBd4wu6IAvn3y9HhzHO9qnw5unzf6gSQHDVOK",
+    "isAdmin": false,
+    "createdAt": "2025-12-25T08:10:31.645Z"
+  }
+]
