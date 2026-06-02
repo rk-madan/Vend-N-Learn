@@ -164,11 +164,29 @@ const ReceiptPage = () => {
 };
 
 // Invoice Styles
-const invoiceCardStyle = { background: 'white', padding: '4rem', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.05)', position: 'relative', overflow: 'hidden' };
-const invoiceHeaderStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4rem' };
+const invoiceCardStyle = {
+    background: 'white',
+    padding:
+        window.innerWidth <= 768
+            ? '1.25rem'
+            : '4rem', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.05)', position: 'relative', overflow: 'hidden' };
+const invoiceHeaderStyle = {
+    display: 'flex',
+    flexDirection:
+        window.innerWidth <= 768
+            ? 'column'
+            : 'row',
+    gap: '1rem',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start', marginBottom: '4rem' };
 const logoBoxStyle = { width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, var(--secondary), var(--primary))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 900, fontSize: '1.5rem', boxShadow: '0 8px 16px rgba(0,0,0,0.1)' };
 const statusLabelStyle = { padding: '5px 15px', borderRadius: '20px', background: 'rgba(22, 163, 74, 0.1)', color: '#16a34a', fontWeight: 900, fontSize: '0.8rem', letterSpacing: '0.1em', display: 'inline-block' };
-const metadataGridStyle = { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem', padding: '2rem', background: '#f8fafc', borderRadius: '16px', marginBottom: '3.5rem' };
+const metadataGridStyle = {
+    display: 'grid',
+    gridTemplateColumns:
+        window.innerWidth <= 768
+            ? '1fr'
+            : 'repeat(4,1fr)', gap: '2rem', padding: '2rem', background: '#f8fafc', borderRadius: '16px', marginBottom: '3.5rem' };
 const metaLabelStyle = { margin: '0 0 6px', fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '0.05em' };
 const metaValueStyle = { margin: 0, fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-main)' };
 const tableHeaderRowStyle = { borderBottom: '2px solid #f1f5f9', color: 'var(--text-muted)', fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.05em' };
@@ -177,7 +195,14 @@ const subtotalRowStyle = { display: 'flex', justifyContent: 'space-between', fon
 const totalDisplayRowStyle = { display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 900, color: 'var(--primary)' };
 const watermarkStyle = { textAlign: 'center', marginTop: '5rem', fontSize: '0.7rem', color: '#cbd5e1', fontWeight: 700, letterSpacing: '0.1em' };
 const statusBannerStyle = { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '12px', background: '#dcfce7', color: '#166534', borderRadius: '12px', fontWeight: 700, fontSize: '0.9rem', marginBottom: '1.5rem' };
-const actionContainerStyle = { display: 'flex', gap: '1.5rem', justifyContent: 'center', marginTop: '3rem' };
+const actionContainerStyle = {
+    display: 'flex',
+    flexDirection:
+        window.innerWidth <= 768
+            ? 'column'
+            : 'row',
+    gap: '1rem',
+    justifyContent: 'center', marginTop: '3rem' };
 const backButtonStyle = { background: 'white', border: '1px solid #e2e8f0', padding: '1rem 2rem', borderRadius: '14px', fontWeight: 700, fontSize: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' };
 const printButtonStyle = { display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2.5rem', borderRadius: '14px', fontSize: '1rem' };
 

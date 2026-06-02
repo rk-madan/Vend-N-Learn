@@ -25,17 +25,37 @@ const Navbar = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '1rem 5%', position: 'sticky', top: 0,
+                display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+                padding: '0.7rem 3%', position: 'sticky', top: 0,
                 background: 'var(--glass)', backdropFilter: 'blur(12px)',
                 zIndex: 100, borderBottom: '1px solid var(--glass-border)'
             }}
         >
-            <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 800, background: 'linear-gradient(135deg, var(--primary), var(--accent))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Vend N Learn
-            </Link>
+            <Link
+    to="/"
+    style={{
+        fontSize: '1.2rem',
+        fontWeight: 800,
+        whiteSpace: 'nowrap',
+        background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent'
+    }}
+>
+    VendnLearn
+</Link>
 
-            <div style={{ display: 'flex', gap: '2rem' }}>
+            <div
+    style={{
+        display: 'flex',
+        gap: '1rem',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+    }}
+>
                 {navLinks.map(link => (
                     <Link
                         key={link.name}
@@ -45,16 +65,19 @@ const Navbar = () => {
                             color: location.pathname === link.path ? 'var(--primary)' : 'var(--text-main)'
                         }}
                     >
-                        {link.icon} {link.name}
+                        {link.icon}
+<span className="nav-text">{link.name}</span>
                     </Link>
                 ))}
                 {user && user.isAdmin && (
                     <Link to="/admin" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, color: 'var(--text-main)' }}>
-                        <FaUserCircle /> Admin
+                        <FaUserCircle />
+<span className="nav-text">Admin</span>
                     </Link>
                 )}
                 <Link to="/help" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, color: 'var(--text-main)' }}>
-                    <FaQuestionCircle /> Help
+                    <FaQuestionCircle />
+<span className="nav-text">Help</span>
                 </Link>
             </div>
 
@@ -88,7 +111,16 @@ const Navbar = () => {
 
                 {user ? (
                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                        <Link to="/orders" style={{ fontWeight: 600, color: 'var(--text-main)' }}>My Orders</Link>
+                        <Link
+    to="/orders"
+    style={{
+        fontWeight: 600,
+        color: 'var(--text-main)',
+        fontSize: '0.85rem'
+    }}
+>
+    Orders
+</Link>
                         <button onClick={logout} className="btn-secondary" style={{ padding: '0.4rem 1rem' }}>Logout</button>
                     </div>
                 ) : (
@@ -97,6 +129,13 @@ const Navbar = () => {
                     </Link>
                 )}
             </div>
+            <style>{`
+@media (max-width:768px){
+    .nav-text{
+        display:none;
+    }
+}
+`}</style>
         </motion.nav>
     );
 };

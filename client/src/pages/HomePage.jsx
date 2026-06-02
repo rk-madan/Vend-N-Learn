@@ -9,6 +9,7 @@ import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
 
 const HomePage = () => {
+    const isMobile = window.innerWidth <= 768;
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [statusIndex, setStatusIndex] = useState(0);
@@ -108,7 +109,15 @@ const HomePage = () => {
                     </div>
 
                     <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4rem', marginBottom: '6rem' }}>
+                        <div
+  style={{
+    display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    alignItems: 'center',
+    gap: isMobile ? '2rem' : '4rem',
+    marginBottom: '6rem'
+  }}
+>
                             <div style={{ flex: 1.2, textAlign: 'left' }}>
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.9 }}
@@ -396,12 +405,26 @@ const themeToggleBtn = { padding: '6px 12px', borderRadius: '8px', border: 'none
 const heroContentStyle = { position: 'relative' };
 const liveStatBadge = { display: 'inline-flex', alignItems: 'center', gap: '12px', padding: '10px 24px', borderRadius: '50px', background: 'rgba(255,255,255,0.9)', border: '1px solid rgba(0,0,0,0.05)', marginBottom: '2.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.05)', height: '44px' };
 const dotStyle = { width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 10px #22c55e' };
-const heroTitleStyle = { fontSize: '4.8rem', fontWeight: 950, lineHeight: 1, margin: '0 0 1.5rem', letterSpacing: '-0.05em' };
+const heroTitleStyle = {
+  fontSize: window.innerWidth <= 768 ? '2.5rem' : '4.8rem',
+  fontWeight: 950,
+  lineHeight: 1,
+  margin: '0 0 1.5rem',
+  letterSpacing: '-0.05em'
+};
 const gradientTitleStyle = { background: 'linear-gradient(135deg, #4f46e5, #ec4899)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' };
 const heroSubStyle = { fontSize: '1.3rem', maxWidth: '750px', lineHeight: 1.7, fontWeight: 500, marginBottom: '2.5rem' };
 const heroCta = { display: 'inline-flex', alignItems: 'center', gap: '12px', padding: '16px 32px', borderRadius: '50px', color: 'white', border: 'none', fontSize: '1.1rem', fontWeight: 800, cursor: 'pointer', boxShadow: '0 10px 25px rgba(79, 70, 229, 0.3)' };
 
-const cardGridStyle = { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', maxWidth: '1100px', margin: '0 auto' };
+const cardGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: window.innerWidth <= 768
+    ? '1fr'
+    : 'repeat(4, 1fr)',
+  gap: '1.5rem',
+  maxWidth: '1100px',
+  margin: '0 auto'
+};
 const mainCardStyle = { padding: '3.5rem 2.5rem', height: '100%', cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', backdropFilter: 'blur(20px)', border: '1px solid', borderRadius: '32px' };
 const iconBoxStyle = { width: '64px', height: '64px', borderRadius: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' };
 const cardTitleStyle = { fontSize: '1.6rem', fontWeight: 900, margin: '0 0 0.6rem' };
@@ -410,7 +433,15 @@ const cardFooterStyle = { marginTop: '2.5rem', fontSize: '1.3rem', display: 'fle
 
 const howItWorksStyle = { padding: '10rem 0', transition: 'background 1s ease' };
 const sectionTitleCenterStyle = { fontSize: '3rem', fontWeight: 950, letterSpacing: '-0.03em', marginBottom: '0.8rem' };
-const stepGridStyle = { display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center', maxWidth: '1000px', margin: '0 auto' };
+const stepGridStyle = {
+  display: 'flex',
+  flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+  gap: '1rem',
+  alignItems: 'center',
+  justifyContent: 'center',
+  maxWidth: '1000px',
+  margin: '0 auto'
+};
 const stepItemStyle = { flex: 1, textAlign: 'center', padding: '3rem 2rem', position: 'relative' };
 const stepNumberStyle = { fontSize: '5rem', fontWeight: 950, marginBottom: '-2rem', position: 'relative', zIndex: 0 };
 const stepTitleStyle = { fontSize: '1.4rem', fontWeight: 900, margin: '0 0 1rem', position: 'relative', zIndex: 1 };
@@ -431,7 +462,12 @@ const prodBriefPrice = { fontSize: '1.3rem', fontWeight: 900 };
 const quickAddButtonStyle = { width: '42px', height: '42px', borderRadius: '14px', color: 'white', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' };
 
 const trustSectionStyle = { padding: '6rem 0', borderTop: '1px solid rgba(0,0,0,0.03)', transition: 'background 1s ease' };
-const trustContainerStyle = { display: 'flex', justifyContent: 'space-between', gap: '3rem' };
+const trustContainerStyle = {
+  display: 'flex',
+  flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+  justifyContent: 'space-between',
+  gap: '2rem'
+};
 const trustItemStyle = { display: 'flex', gap: '20px', alignItems: 'center', flex: 1 };
 const trustTitle = { margin: '0 0 4px', fontSize: '1.1rem', fontWeight: 900 };
 const trustDesc = { margin: 0, fontSize: '0.9rem', fontWeight: 500 };

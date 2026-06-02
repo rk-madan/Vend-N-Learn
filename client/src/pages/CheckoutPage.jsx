@@ -254,8 +254,14 @@ const CheckoutPage = () => {
                                                 style={inputStyle}
                                             />
                                         </div>
-                                        <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '2rem' }}>
-                                            <div style={{ flex: 1 }}>
+<div
+    style={{
+        display: 'flex',
+        flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+        gap: '1rem',
+        marginBottom: '2rem'
+    }}
+>                                            <div style={{ flex: 1 }}>
                                                 <label style={labelStyle}><FaCalendarAlt size={12} /> EXPIRY</label>
                                                 <input type="text" name="expiry" placeholder="12/28" value={cardDetails.expiry} onChange={handleInputChange} required style={inputStyle} />
                                             </div>
@@ -264,8 +270,13 @@ const CheckoutPage = () => {
                                                 <input type="text" name="cvv" placeholder="123" value={cardDetails.cvv} onChange={handleInputChange} required style={inputStyle} />
                                             </div>
                                         </div>
-                                        <div style={{ display: 'flex', gap: '1rem' }}>
-                                            <button type="button" onClick={() => setStep('selection')} style={{ ...payButtonStyle, flex: 0.5, background: 'rgba(0,0,0,0.05)', color: 'var(--text-main)', border: 'none' }}>BACK</button>
+<div
+    style={{
+        display: 'flex',
+        flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+        gap: '1rem'
+    }}
+>                                            <button type="button" onClick={() => setStep('selection')} style={{ ...payButtonStyle, flex: 0.5, background: 'rgba(0,0,0,0.05)', color: 'var(--text-main)', border: 'none' }}>BACK</button>
                                             <button type="submit" disabled={isProcessing} className="btn-primary" style={{ ...payButtonStyle, flex: 1 }}>
                                                 {isProcessing ? <><FaSpinner className="spin" /> AUTHORIZING...</> : <>COMPLETE PAYMENT</>}
                                             </button>
@@ -458,9 +469,27 @@ const methodIconStyle = {
 
 
 // Styles
-const containerStyle = { minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' };
-const gridStyle = { display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '2rem', width: '100%', maxWidth: '1000px' };
-const formPanelStyle = { padding: '3rem', position: 'relative', overflow: 'hidden' };
+const containerStyle = {
+    minHeight: '80vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1rem'
+};
+const gridStyle = {
+    display: 'grid',
+    gridTemplateColumns: window.innerWidth <= 768
+        ? '1fr'
+        : '1.2fr 1fr',
+    gap: '1rem',
+    width: '100%',
+    maxWidth: '1000px'
+};
+const formPanelStyle = {
+    padding: window.innerWidth <= 768 ? '1.25rem' : '3rem',
+    position: 'relative',
+    overflow: 'hidden'
+};
 const summaryPanelStyle = { display: 'flex', flexDirection: 'column' };
 const headerStyle = { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.5rem' };
 const inputGroupStyle = { marginBottom: '1.5rem' };

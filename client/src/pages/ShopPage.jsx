@@ -6,6 +6,7 @@ import { FaSearch, FaPlus, FaCheck, FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { FaStar } from 'react-icons/fa';
 
 const ShopPage = () => {
     const [products, setProducts] = useState([]);
@@ -167,20 +168,57 @@ const ShopPage = () => {
                 </div>
 
                 {/* Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
-                    {filtered.map((p) => {
+
+<div
+    className="product-grid"
+    style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+        gap: '1rem'
+    }}
+>                    {filtered.map((p) => {
                         const currentStock = getStock(p);
                         return (
                             <motion.div
-                                layout
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                key={p._id}
-                                className="glass-panel"
-                                style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column' }}
-                            >
+    layout
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    key={p._id}
+    className="glass-panel product-card"
+    style={{
+        padding: '1rem',
+        display: 'flex',
+        flexDirection: 'column'
+    }}
+>
                                 <Link to={`/product/${p._id}`}>
-                                    <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', background: '#fff', borderRadius: '1rem', padding: '10px', position: 'relative' }}>
+                                    <div style={{ height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', background: '#fff', borderRadius: '1rem', padding: '10px', position: 'relative' }}>
+                                    <div
+                                        style={{
+                                            position: 'absolute',
+                                            top: '10px',
+                                            left: '10px',
+                                            background: '#ffffff',
+                                            padding: '6px 10px',
+                                            borderRadius: '20px',
+                                            fontSize: '0.85rem',
+                                            fontWeight: 'bold',
+                                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                                            zIndex: 100,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '4px'
+                                        }}
+                                    
+                                    >
+                                        <FaStar color="#f59e0b" />
+
+                                        {
+                                            p.numReviews > 0
+                                                ? p.averageRating.toFixed(1)
+                                                : 'No Rating'
+                                        }
+                                    </div>
                                         <img src={p.image} alt={p.name} style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} />
                                         <button
                                             onClick={(e) => {
@@ -203,7 +241,7 @@ const ShopPage = () => {
 
                                 <div style={{ flex: 1 }}>
                                     <Link to={`/product/${p._id}`}>
-                                        <h3 style={{ fontSize: '1.1rem', margin: '0 0 0.5rem', color: 'var(--text-main)' }}>{p.name}</h3>
+                                        <h3 style={{ fontSize: '0.95rem', margin: '0 0 0.5rem', color: 'var(--text-main)' }}>{p.name}</h3>
                                     </Link>
                                     <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>{p.description}</p>
                                 </div>
@@ -256,6 +294,27 @@ const ShopPage = () => {
                     </div>
                 )}
             </div>
+            <style>{`
+@media (max-width:768px){
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr)!important;
+        gap:10px!important;
+    }
+
+    .product-card{
+        padding:10px!important;
+    }
+
+    .product-card img{
+        max-height:120px!important;
+    }
+
+    .container{
+        padding:1rem 0.5rem!important;
+    }
+}
+`}</style>
         </Layout>
     );
 };

@@ -10,6 +10,8 @@ import toast from 'react-hot-toast';
 const ProductDetailsPage = () => {
     const { id } = useParams();
     const { user, token } = useContext(AuthContext);
+    console.log("USER =", user);
+    console.log("TOKEN =", token);
     const { addToCart, getCountForProduct } = useCart();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -99,24 +101,59 @@ const ProductDetailsPage = () => {
                     <motion.div
                         initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
                         className="glass-panel"
-                        style={{ height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', padding: '2rem' }}
-                    >
+style={{
+    height: 'auto',
+    minHeight: '300px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#fff',
+    padding: '2rem'
+}}                    >
                         <img src={product.image} alt={product.name} style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} />
                     </motion.div>
 
                     {/* Right: Info */}
                     <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
                         <div className="badge badge-stock" style={{ marginBottom: '1rem' }}>{product.category || 'Stationery'}</div>
-                        <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>{product.name}</h1>
+                        <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 3rem)', marginBottom: '1rem' }}>
+  {product.name}
+</h1>
 
-                        <div style={{ display: 'flex', gap: '5px', color: '#f59e0b', marginBottom: '1.5rem', alignItems: 'center' }}>
-                            {[1, 2, 3, 4, 5].map(star => (
-                                <FaStar key={star} color={star <= 4.5 ? '#f59e0b' : '#d1d5db'} />
-                            ))}
-                            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginLeft: '10px' }}>
-                                ({product.reviews?.length || 0} reviews)
-                            </span>
-                        </div>
+                        <div
+    style={{
+        display: 'flex',
+        gap: '5px',
+        color: '#f59e0b',
+        marginBottom: '1.5rem',
+        alignItems: 'center'
+    }}
+>
+    {[1, 2, 3, 4, 5].map(star => (
+        <FaStar
+            key={star}
+            color={
+                star <= Math.round(product.averageRating || 0)
+                    ? '#f59e0b'
+                    : '#d1d5db'
+            }
+        />
+    ))}
+
+    <span
+        style={{
+            color: 'var(--text-muted)',
+            fontSize: '0.9rem',
+            marginLeft: '10px'
+        }}
+    >
+        {
+            product.numReviews > 0
+                ? `${product.averageRating.toFixed(1)} (${product.numReviews} reviews)`
+                : 'No Ratings Yet'
+        }
+    </span>
+</div>
 
                         <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '2rem' }}>
                             {product.description}
@@ -161,8 +198,14 @@ const ProductDetailsPage = () => {
                 <div className="glass-panel" style={{ padding: '3rem' }}>
                     <h2 style={{ marginBottom: '2rem' }}>Customer Reviews</h2>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '4rem' }}>
-                        {/* List */}
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '2rem'
+  }}
+  className="reviews-grid"
+>                        {/* List */}
                         <div>
                             {product.reviews && product.reviews.length > 0 ? (
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

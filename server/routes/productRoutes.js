@@ -69,6 +69,16 @@ router.post('/:id/reviews', protect, async (req, res) => {
         });
 
         await review.save();
+        const reviews = await Review.find({ product: req.params.id });
+
+        const avg =
+            reviews.reduce((sum, item) => sum + item.rating, 0) /
+            reviews.length;
+
+        product.averageRating = avg;
+        product.numReviews = reviews.length;
+
+        await product.save();
         res.status(201).json({ message: 'Review added' });
     } catch (error) {
         res.status(500).json({ message: error.message });

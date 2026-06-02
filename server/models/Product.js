@@ -5,12 +5,22 @@ const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String },
     price: { type: Number, required: true },
-    image: { type: String, required: true }, // URL or path from old frontend
+    image: { type: String, required: true },
     category: { type: String },
-    stock: { type: Number, default: 5 }, // Default 5 as requested
+    stock: { type: Number, default: 5 },
+
+    averageRating: {
+        type: Number,
+        default: 0
+    },
+
+    numReviews: {
+        type: Number,
+        default: 0
+    }
+
 }, { timestamps: true });
 
-// Virtual for checking availability
 productSchema.virtual('isStockAvailable').get(function () {
     return this.stock > 0;
 });

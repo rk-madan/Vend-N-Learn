@@ -167,10 +167,11 @@ const AdminDashboard = () => {
 
     return (
         <Layout>
-            <div style={{ display: 'flex', minHeight: '92vh', background: '#f8fafc' }}>
-                {/* --- SIDEBAR --- */}
-                <div style={sidebarWrapperStyle}>
-                    <div style={{ padding: '0 1rem', marginBottom: '3rem' }}>
+<div
+    className="admin-layout"
+    style={{ display: 'flex', minHeight: '92vh', background: '#f8fafc' }}
+>               {/* --- SIDEBAR --- */}
+<div className="admin-sidebar" style={sidebarWrapperStyle}>                    <div style={{ padding: '0 1rem', marginBottom: '3rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                             <div style={logoBoxStyle}><FaCog size={22} /></div>
                             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#1e293b' }}>JusVend Admin</h3>
@@ -194,8 +195,14 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* --- CONTENT --- */}
-                <div style={{ flex: 1, padding: '3rem', maxWidth: '1600px', margin: '0 auto', overflowX: 'hidden' }}>
-                    <AnimatePresence mode="wait">
+<div
+    className="admin-content"
+    style={{
+        flex: 1,
+        padding: '1rem',
+        overflowX: 'auto'
+    }}
+>                   <AnimatePresence mode="wait">
                         {loading ? (
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={spinnerContainerStyle}>
                                 <div className="loader-ring"></div>
@@ -494,6 +501,26 @@ const AdminDashboard = () => {
                     gap: 15px;
                     border: 1px solid #e2e8f0;
                 }
+                @media (max-width:768px){
+
+    .admin-layout{
+        flex-direction:column !important;
+    }
+
+    .admin-sidebar{
+        width:100% !important;
+        min-width:100% !important;
+        height:auto !important;
+        position:relative !important;
+        border-right:none !important;
+        border-bottom:1px solid #e2e8f0;
+    }
+
+    .admin-content{
+        width:100% !important;
+        padding:1rem !important;
+    }
+}
             `}</style>
         </Layout>
     );
@@ -537,8 +564,14 @@ const HeaderSection = ({ title, subtitle }) => (
 
 // --- CSS-IN-JS OBJECTS ---
 const sidebarWrapperStyle = {
-    width: '280px', background: 'white', borderRight: '1px solid #e2e8f0',
-    padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', position: 'sticky', top: '80px', height: 'calc(100vh - 80px)'
+    width: '260px',
+    minWidth: '260px',
+    background: 'white',
+    borderRight: '1px solid #e2e8f0',
+    padding: '1rem',
+    display: 'flex',
+    flexDirection: 'column',
+    overflowY: 'auto'
 };
 const logoBoxStyle = { width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' };
 const sidebarLinkStyle = (active) => ({
@@ -547,8 +580,13 @@ const sidebarLinkStyle = (active) => ({
 });
 const logoutCardStyle = { marginTop: 'auto', padding: '1.5rem', background: '#f8fafc', borderRadius: '20px', border: '1px solid #e2e8f0' };
 const logoutButtonStyle = { width: '100%', padding: '0.8rem', borderRadius: '12px', background: 'white', color: '#ef4444', border: '1px solid #fee2e2', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' };
-const h1Style = { fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#0f172a', marginBottom: '0.5rem' };
-const statsGridStyle = { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '3rem' };
+const h1Style = { fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#0f172a', marginBottom: '0.5rem' };
+const statsGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))',
+    gap: '1rem',
+    marginBottom: '2rem'
+};
 const statCardStyle = (color) => ({ padding: '2rem', borderRadius: '24px', border: `1px solid #e2e8f0`, background: 'white' });
 const statIconBox = (color) => ({ width: '48px', height: '48px', borderRadius: '14px', background: `${color}10`, color: color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' });
 const statLabelStyle = { fontSize: '0.9rem', fontWeight: 700, color: '#64748b', marginBottom: '0.5rem' };
