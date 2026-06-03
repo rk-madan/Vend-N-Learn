@@ -8,6 +8,8 @@ import { AuthContext } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
 
+const API_BASE = `${import.meta.env.VITE_API_URL}/api`;
+
 const HomePage = () => {
     const isMobile = window.innerWidth <= 768;
     const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -53,17 +55,18 @@ const HomePage = () => {
 
     useEffect(() => {
         const fetchFeatured = async () => {
-            try {
-                export const API_BASE = `${import.meta.env.VITE_API_URL}/api`;
-                const data = await res.json();
-                setFeaturedProducts(data.slice(0, 4));
-            } catch (err) {
-                console.error('Featured Load Error:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchFeatured();
+    try {
+        const res = await fetch(`${API_BASE}/products`);
+        const data = await res.json();
+        setFeaturedProducts(data.slice(0, 4));
+    } catch (err) {
+        console.error('Featured Load Error:', err);
+    } finally {
+        setLoading(false);
+    }
+};
+
+fetchFeatured();
 
         const timer = setInterval(() => {
             setStatusIndex(prev => (prev + 1) % statuses.length);
