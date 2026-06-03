@@ -24,7 +24,7 @@ const ProductDetailsPage = () => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/products/${id}`);
+           const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
             if (res.ok) {
                 const data = await res.json();
                 setProduct(data);
@@ -43,6 +43,7 @@ const ProductDetailsPage = () => {
     }, [id]);
 
     const handleAddToCart = () => {
+    if (!product) return;
         const available = product.stock - getCountForProduct(product.sku);
         if (available > 0) {
             addToCart(product);
@@ -62,7 +63,8 @@ const ProductDetailsPage = () => {
         }
         setSubmittingReview(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/products/${id}/reviews`, {
+            const res = await fetch(
+  `${import.meta.env.VITE_API_URL}/api/products/${id}/reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -149,7 +151,7 @@ style={{
     >
         {
             product.numReviews > 0
-                ? `${product.averageRating.toFixed(1)} (${product.numReviews} reviews)`
+                ? `${Number(product.averageRating || 0).toFixed(1)} (${product.numReviews} reviews)`
                 : 'No Ratings Yet'
         }
     </span>
