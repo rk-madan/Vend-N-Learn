@@ -54,7 +54,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchFeatured = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/products');
+                export const API_BASE = `${import.meta.env.VITE_API_URL}/api`;
                 const data = await res.json();
                 setFeaturedProducts(data.slice(0, 4));
             } catch (err) {

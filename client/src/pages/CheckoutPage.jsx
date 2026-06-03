@@ -117,7 +117,7 @@ const CheckoutPage = () => {
 
         try {
             // 1. Create Order
-            const orderRes = await fetch('http://localhost:5000/api/orders', {
+            const orderRes = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({
@@ -141,7 +141,9 @@ const CheckoutPage = () => {
             const order = await orderRes.json();
 
             // 2. Mark as Paid
-            const payRes = await fetch(`http://localhost:5000/api/orders/${order._id}/pay`, {
+            const payRes = await fetch(
+  `${import.meta.env.VITE_API_URL}/api/orders/${order._id}/pay`,
+  {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

@@ -14,7 +14,7 @@ const WishlistPage = () => {
 
     const fetchWishlist = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/users/wishlist', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/wishlist`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.ok) {
@@ -34,7 +34,7 @@ const WishlistPage = () => {
 
     const removeFromWishlist = async (productId) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/users/wishlist/${productId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/wishlist/${productId}`, {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
